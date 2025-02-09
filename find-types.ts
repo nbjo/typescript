@@ -21,14 +21,20 @@ type Person = {
   account: Account;
 };
 
-
-type FindAllTypesForKey<SearchIn, KeyToLookFor extends PropertyKey> = 
-SearchIn extends object 
-  ? (KeyToLookFor extends keyof SearchIn ? SearchIn[KeyToLookFor]: never)
-    | {
-      [P in keyof SearchIn] : FindAllTypesForKey<SearchIn[P], KeyToLookFor>
-    }[keyof SearchIn]
+type FindAllTypesForKey<
+  SearchIn,
+  KeyToLookFor extends PropertyKey
+> = SearchIn extends object
+  ?
+      | (KeyToLookFor extends keyof SearchIn ? SearchIn[KeyToLookFor] : never)
+      | {
+          [P in keyof SearchIn]: FindAllTypesForKey<SearchIn[P], KeyToLookFor>;
+        }[keyof SearchIn]
   : never;
 
-type Id = FindAllTypesForKey<Person, 'id'>;
+type Id = FindAllTypesForKey<Person, "id">;
 //   ^?
+
+const id: Id = "id";
+
+console.log("Id = " + id);

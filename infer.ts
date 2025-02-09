@@ -16,7 +16,7 @@ type RgbInferNumber<T> = T extends `rgb(${infer first extends number},${infer se
 
 type ValidRgb = RgbInfer<'rgb(1,2,3)'>;
 //    ^?
-type ValidRgbNumber = RgbInferNumber<'rgb(1,2,3)'>;
+type ValidRgbNumber = RgbInferNumber<'rgb(1, 3, 3)'>;
 //    ^? 
 
 
